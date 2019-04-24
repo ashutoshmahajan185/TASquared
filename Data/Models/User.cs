@@ -33,7 +33,7 @@ namespace Data.Models
             get; set;
         }
 
-        public ICollection<Messages> messages
+        public ICollection<Message> messages
         {
             get; set;
         }
