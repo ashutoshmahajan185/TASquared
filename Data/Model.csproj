@@ -98,11 +98,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Area.cs" />
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Example.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Locale.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Post.cs" />
+    <Compile Include="Models\Subcategory.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
