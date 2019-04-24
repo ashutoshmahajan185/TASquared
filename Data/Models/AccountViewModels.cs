@@ -12,6 +12,7 @@ namespace Models
         public string Email { get; set; }
     }
 
+    // Entering the project: Tushar
     public class ExternalLoginListViewModel
     {
         public string ReturnUrl { get; set; }
