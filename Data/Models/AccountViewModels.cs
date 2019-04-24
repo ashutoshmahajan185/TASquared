@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Models
 {
 
-    // Git changes
+    // Git changes Test #1
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
