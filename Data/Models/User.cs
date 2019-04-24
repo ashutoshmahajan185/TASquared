@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Data.Models
 {
-    class User
+    public class User
     {
         [Required]
         public String userID

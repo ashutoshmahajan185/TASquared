@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Data.Models
 {
-    class Locale
+    public class Locale
     {
 
         [DefaultValue("")]

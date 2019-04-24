@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Data.Models
 {
-    class Post
+    public class Post
     {
 
         [Key]

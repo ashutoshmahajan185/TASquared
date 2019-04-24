@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Data.Models
 {
-    class Area
+    public class Area
     {
         [Required]
         public String name

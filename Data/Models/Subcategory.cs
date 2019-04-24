@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Data.Models
 {
-    class Subcategory
+    public class Subcategory
     {
 
         [DefaultValue("")]

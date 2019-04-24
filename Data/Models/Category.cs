@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Data.Models
 {
-    class Category
+    public class Category
     {
         [DefaultValue("")]
         public String name

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Data.Models
 {
-    class Message
+    public class Message
     {
 
         [Key]
