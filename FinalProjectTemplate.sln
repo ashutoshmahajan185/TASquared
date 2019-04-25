@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DB", "DB\DB.csproj", "{B425
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TASquared", "TASquared\TASquared.csproj", "{38E9180B-F087-442A-B251-772DFBA02AB8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestCases1", "TestCases1\TestCases1.csproj", "{B987950E-05FF-4AA1-A0F1-87D3CE15E4EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{38E9180B-F087-442A-B251-772DFBA02AB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38E9180B-F087-442A-B251-772DFBA02AB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38E9180B-F087-442A-B251-772DFBA02AB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B987950E-05FF-4AA1-A0F1-87D3CE15E4EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B987950E-05FF-4AA1-A0F1-87D3CE15E4EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B987950E-05FF-4AA1-A0F1-87D3CE15E4EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B987950E-05FF-4AA1-A0F1-87D3CE15E4EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
