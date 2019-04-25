@@ -81,6 +81,8 @@ namespace DB.Database
             return orderedSubCategories;
         }
 
+        //Andrew how does this work?
+
         //cID can be either categoryID or subcategoryID and lID can be either localeID or areaID
         public static IEnumerable<Post> GetAllPosts(string cID, string lID)
         {
@@ -105,11 +107,11 @@ namespace DB.Database
 
             return orderedPosts;
         }
-
+        
         public static IEnumerable<Post> GetAllUnexpiredPosts(string userID)
         {
             var Posts = from post in db.Posts
-                        where post.isDeletedOrHidden
+                        where !post.isDeletedOrHidden
                         select post;
 
             //bizlogic to sort according to most recent time
@@ -121,7 +123,7 @@ namespace DB.Database
         public static IEnumerable<Post> GetAllExpiredPosts(string userID)
         {
             var Posts = from post in db.Posts
-                        where !post.isDeletedOrHidden
+                        where post.isDeletedOrHidden
                         select post;
 
             //bizlogic to sort according to most recent time
@@ -162,6 +164,111 @@ namespace DB.Database
             db.Posts.Add(post);
             db.SaveChanges();
         }
+
+
+        /*addMessageForPost: adding a message for a specific posting*/
+        public static void addMessageForPost(string postId, Message msg)
+        {
+            var post = db.Posts.Find(postId);
+            post.messages.Add(msg);
+            db.SaveChanges();
+        }
+        /*addMessageForUser: adding a message for a specific user*/
+        public static void addMessageForUser(string userId, Message msg)
+        {
+            var user = db.User.Find(userId);
+            user.messages.Add(msg);
+            db.SaveChanges();
+        }
+        /*changeUserRole: changing the role of the user to Administrator */
+        public static void changeUserRole(string userId)
+        {
+            var user = db.User.Find(userId);
+            user.userRole = "Admin";
+            db.SaveChanges();
+        }
+        /* deletePost: setting the isDeletedorHidden property to true from db */
+        public static void deletePost(string postId)
+        {
+            var post = db.Posts.Find(postId);
+            post.isDeletedOrHidden = true;
+            db.SaveChanges();
+        }
+        /*expirePost: Checking if current time is greater than or equal to post's expiration time
+         * in which it is "removed" from the database */
+        public static void expirePost(string postId)
+        {
+            var post = db.Posts.Find(postId);
+            if (post.postExpiration <= DateTime.Now)
+            {
+                post.isDeletedOrHidden = true;
+            } else
+            {
+                return;
+            }
+            db.SaveChanges();
+        }
+
+        /*getPosts: gets the list of posts by a specific user*/
+        public static IEnumerable<Post> getPosts(string userId)
+        {
+            IEnumerable<Post> lst;
+            var entities = from entity in db.Posts
+                           where userId == entity.ownerID
+                           select entity;
+            lst = entities;
+            return lst;
+        }
+        /* addCategory: adding a new category */
+        public static void addCategory(Category cat)
+        {
+            db.Categories.Add(cat);
+            db.SaveChanges();
+        }
+        /* addSubcategory: adding a new subcategory */
+        public static void addSubcategory(Subcategory sub)
+        {
+            db.SubCategories.Add(sub);
+            db.SaveChanges();
+        }
+        /* addArea: adding a new area */
+        public static void addArea(Area area)
+        {
+            db.Areas.Add(area);
+            db.SaveChanges();
+        }
+        /* addLocale: adding a new locale */
+        public static void addLocale(Locale loc)
+        {
+            db.Locales.Add(loc);
+            db.SaveChanges();
+        }
+
+        /* getAllUsers: Returns a list of all users
+         * Checks to see if the user is an administrator
+         * before allowing access to users list */
+        public IEnumerable<User> getAllUsers(User user)
+        {
+            
+            if (user.userRole != "Admin")
+            {
+                return null;
+            }
+            var users = from customer in db.User
+                        select customer;
+
+            IEnumerable<User> lst = users.ToList();
+            return lst;
+        }
+
+
+        /*AddUser: adding a new user */
+        public static void AddUser(User user)
+        {
+            db.User.Add(user);
+            db.SaveChanges();
+        }
+
 
         public static void DoDatabaseOperation()
         {

@@ -17,7 +17,7 @@ namespace Data.Models
         }
 
         [Required]
-        public int userRole
+        public string userRole
         {
             get; set;
 
