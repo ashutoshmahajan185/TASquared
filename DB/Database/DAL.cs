@@ -43,8 +43,9 @@ namespace DB.Database
                         select area;
 
             //add bizlogic here to sort before returning
+            var orderedAreas = Biz.SortAreas(Areas.ToList());
 
-            return Areas.ToList();
+            return orderedAreas;
         }
 
         public static IEnumerable<Locale> GetAllLocales()
@@ -53,8 +54,9 @@ namespace DB.Database
                         select locale;
 
             //add bizlogic here to sort before returning
+            var orderedlocales = Biz.SortLocales(Locales.ToList());
 
-            return Locales.ToList();
+            return orderedlocales;
         }
 
         public static IEnumerable<Category> GetAllCategories()
@@ -63,8 +65,9 @@ namespace DB.Database
                           select category;
 
             //add bizlogic here to sort before returning
+            var orderedCategories = Biz.SortCategories(Categories.ToList());
 
-            return Categories.ToList();
+            return orderedCategories;
         }
 
         public static IEnumerable<Subcategory> GetAllSubCategories()
@@ -73,8 +76,9 @@ namespace DB.Database
                              select subcategory;
 
             //add bizlogic here to sort before returning
+            var orderedSubCategories = Biz.SortSubCategories(SubCategories.ToList());
 
-            return SubCategories.ToList();
+            return orderedSubCategories;
         }
 
         //cID can be either categoryID or subcategoryID and lID can be either localeID or areaID
@@ -85,8 +89,9 @@ namespace DB.Database
                         select post;
 
             //bizlogic to sort according to most recent time
+            var orderedPosts = Biz.OrderPosts(Posts.ToList());
 
-            return Posts.ToList();
+            return orderedPosts;
 
         }
 
@@ -96,8 +101,9 @@ namespace DB.Database
                         select post;
 
             //bizlogic to sort according to most recent time
+            var orderedPosts = Biz.OrderPosts(Posts.ToList());
 
-            return Posts.ToList();
+            return orderedPosts;
         }
 
         public static IEnumerable<Post> GetAllUnexpiredPosts(string userID)
@@ -107,8 +113,9 @@ namespace DB.Database
                         select post;
 
             //bizlogic to sort according to most recent time
+            var orderedPosts = Biz.OrderPosts(Posts.ToList());
 
-            return Posts.ToList();
+            return orderedPosts;
         }
 
         public static IEnumerable<Post> GetAllExpiredPosts(string userID)
@@ -118,16 +125,9 @@ namespace DB.Database
                         select post;
 
             //bizlogic to sort according to most recent time
+            var orderedPosts = Biz.OrderPosts(Posts.ToList());
 
-            return Posts.ToList();
-        }
-
-        public static void SavePost(Post post)
-        {
-            //bizlogic to compute expiration time
-
-            db.Posts.Add(post);
-            db.SaveChanges();
+            return orderedPosts;
         }
 
         public static IEnumerable<Message> GetMessagesToPost(string postID)
@@ -137,8 +137,9 @@ namespace DB.Database
             var Messages = Post.messages;
 
             //bizlogic to sort
+            var orderedMessages = Biz.OrderMessages(Messages.ToList());
 
-            return Messages.ToList();
+            return orderedMessages;
         }
 
         public static IEnumerable<Message> GetMessagesFromUser(string userID)
@@ -148,8 +149,18 @@ namespace DB.Database
             var Messages = User.messages;
 
             //bizlogic to sort
+            var orderedMessages = Biz.OrderMessages(Messages.ToList());
 
-            return Messages.ToList();
+            return orderedMessages;
+        }
+
+        public static void SavePost(Post post)
+        {
+            //bizlogic to compute expiration time
+            Biz.SetPostExpirationTime(post);
+
+            db.Posts.Add(post);
+            db.SaveChanges();
         }
 
         public static void DoDatabaseOperation()
@@ -163,7 +174,7 @@ namespace DB.Database
                 ex.Name = "Hello";
 
                 // Call into biz logic
-                Biz1.IsExampleValid(ex);
+                Biz.IsExampleValid(ex);
 
                 // Do something useful here
 
