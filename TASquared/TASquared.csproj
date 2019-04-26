@@ -251,6 +251,10 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BizLogic\BizLogic.csproj">
+      <Project>{e2b78c74-2582-4271-896d-241ca51b3402}</Project>
+      <Name>BizLogic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Data\Model.csproj">
       <Project>{2a01636b-fe1c-40ea-981e-bc09a9bdd247}</Project>
       <Name>Model</Name>

@@ -10,6 +10,9 @@ namespace Data.Models
 {
     public class Area
     {
+        //[Key]
+      
+        public String areaID { get; set; }
         [Required]
         public String name
         {
