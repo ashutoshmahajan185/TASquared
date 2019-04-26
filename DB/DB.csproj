@@ -76,7 +76,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Database\DAL.cs" />
+    <Compile Include="initializeData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="seedData.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BizLogic\BizLogic.csproj">

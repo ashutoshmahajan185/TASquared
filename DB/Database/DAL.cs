@@ -14,6 +14,8 @@ namespace DB.Database
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+
+        //Database.SetInitializer<ApplicationDbContext>(new initializeData()); 
         public ApplicationDbContext() : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
