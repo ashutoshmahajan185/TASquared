@@ -100,7 +100,6 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Area.cs" />
     <Compile Include="Models\Category.cs" />
-    <Compile Include="Models\Example.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Locale.cs" />
     <Compile Include="Models\ManageViewModels.cs" />

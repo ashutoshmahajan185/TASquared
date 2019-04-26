@@ -12,7 +12,7 @@ namespace Data.Models
     {
 
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int messageID { get; set; }
 
         [Required]
@@ -24,6 +24,8 @@ namespace Data.Models
         [Required]
         public String receiverID { get; set; }
 
+        [Required]
+        public String body { get; set; }
 
 
     }

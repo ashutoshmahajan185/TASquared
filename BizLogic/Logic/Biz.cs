@@ -50,9 +50,6 @@ namespace BizLogic.Logic
             post.postExpiration = post.postTimestamp.AddDays(10); 
         }
 
-        public static bool IsExampleValid(Example p)
-        {
-            return true;
-        }
+       
     }
 }

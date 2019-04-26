@@ -269,26 +269,5 @@ namespace DB.Database
             db.User.Add(user);
             db.SaveChanges();
         }
-
-
-        public static void DoDatabaseOperation()
-        {
-            // You can place your models into ApplicationDbContext
-            // or create your own context
-            using (var db = new ApplicationDbContext())
-            {
-                // Create and manipulate your model
-                Example ex = new Example();
-                ex.Name = "Hello";
-
-                // Call into biz logic
-                Biz.IsExampleValid(ex);
-
-                // Do something useful here
-
-                db.SaveChanges();
-            }
-        }
-
     }
 }
