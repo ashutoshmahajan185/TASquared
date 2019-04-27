@@ -63,7 +63,7 @@ namespace TestCases1
         {
             List<String> listCategories = new List<String> {
                 "Electronics", "For Sale", "Gigs", "Housing", "Jobs"
-        };
+            };
 
             var cats = from cat in db.Categories
                        select cat;
@@ -130,7 +130,7 @@ namespace TestCases1
         {
             List<String> listMessages = new List<String> {
                 "4", "62", "23", "17"
-        };
+            };
             var msgs = from msg in db.Messages
                        select msg;
             var output = Biz.OrderMessages(msgs.ToList());
@@ -150,5 +150,168 @@ namespace TestCases1
         {
             // Redundant test case
         }
+
+        [TestMethod]
+        public void Test_getAllAreas()
+        {
+            List<String> listAreas = new List<String> {
+                "Chicago", "Los Angeles", "New York", "San Francisco", "Seattle"
+            };
+            var result = DbLayer.GetAllAreas();
+            List<String> AreaNames = new List<String>();
+
+            foreach (var item in result)
+            {
+                AreaNames.Add(item.name);
+            }
+
+            CollectionAssert.AreEqual(listAreas, AreaNames);
+
+
+        }
+
+        [TestMethod]
+        public void Test_getAllLocales()
+        {
+
+            List<String> listLocales = new List<String> {
+                "Balboa Park", "Brooklyn", "Nob Hill", "Pike Place", "South Side"
+            };
+
+            var result = DbLayer.GetAllLocales();
+
+            List<String> LocaleNames = new List<String>();
+
+            foreach (var item in result)
+            {
+                LocaleNames.Add(item.name);
+            }
+
+            CollectionAssert.AreEqual(listLocales, LocaleNames);
+
+        }
+
+        [TestMethod]
+        public void Test_getAllCategories()
+        {
+
+            List<String> listCategories = new List<String> {
+                "Electronics", "For Sale", "Gigs", "Housing", "Jobs"
+            };
+
+            var result = DbLayer.GetAllCategories();
+
+            List<String> CatNames = new List<String>();
+
+            foreach (var item in result)
+            {
+                CatNames.Add(item.name);
+            }
+
+            CollectionAssert.AreEqual(listCategories, CatNames);
+
+        }
+        [TestMethod]
+        public void Test_getAllSubCategories()
+        {
+            List<String> listSubcategories = new List<String> {
+                "Apartments", "Bands", "Computer Parts", "Resume Workshops", "Vehicles"
+            };
+
+            var result = DbLayer.GetAllSubCategories();
+
+            List<String> SubCatNames = new List<String>();
+
+            foreach (var item in result)
+            {
+                SubCatNames.Add(item.name);
+            }
+
+            CollectionAssert.AreEqual(listSubcategories, SubCatNames);
+        }
+
+        [TestMethod]
+        // Testing only for user. Other combinations like getAllPost based on
+        // 2. Area
+        // 3. Locale
+        // 4. Category
+        // 5. Subcategory
+        public void Test_getAllPosts() 
+        {
+            List<String> listPosts = new List<String> {
+                "14"
+            };
+
+            var result = DbLayer.GetAllPosts("323534");
+            List<String> postNames = new List<String>();
+
+            foreach (var item in result)
+            {
+                postNames.Add(item.postNumber.ToString());
+            }
+
+            CollectionAssert.AreEqual(listPosts, postNames);
+        }
+
+        [TestMethod]
+        public void Test_getAllExpiredPosts()
+        {
+            List<String> listPosts = new List<String> {
+                "24"
+            };
+
+            var result = DbLayer.GetAllExpiredPosts("14342423");
+            List<String> postNames = new List<String>();
+
+            foreach (var item in result)
+            {
+                postNames.Add(item.postNumber.ToString());
+            }
+
+            CollectionAssert.AreEqual(listPosts, postNames);
+
+        }
+
+
+        [TestMethod]
+        public void Test_getAllUnExpiredPosts()
+        {
+            List<String> listPosts = new List<String> {
+                "52"
+            };
+
+            var result = DbLayer.GetAllUnexpiredPosts("4233543");
+            List<String> postNames = new List<String>();
+
+            foreach (var item in result)
+            {
+                postNames.Add(item.postNumber.ToString());
+            }
+
+            CollectionAssert.AreEqual(listPosts, postNames);
+
+        }
+
+        [TestMethod]
+        public void Test_getMessagesToPost()
+        {
+            // Cannot implement the test case at this stage.
+            // Database connection needs to be done
+        }
+
+        [TestMethod]
+        public void Test_getMessageFromUser()
+        {
+            // Cannot implement the test case at this stage.
+            // Database connection needs to be done
+        }
+
+        [TestMethod]
+        public void Test_checkExpirePost()
+        {
+            // Cannot implement the test case at this stage.
+            // Database connection needs to be done
+        }
+
     }
 }

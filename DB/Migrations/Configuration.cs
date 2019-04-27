@@ -70,7 +70,8 @@ namespace DB.Migrations
                   ownerID = "14342423",
                   title = "Looking for band mates",
                   area = "4",
-                  category = "53"
+                  category = "53",
+                  isDeletedOrHidden = true
               },
                new Post()
                {
@@ -81,7 +82,8 @@ namespace DB.Migrations
                    ownerID = "4233543",
                    title = "Looking for resume help",
                    area = "4",
-                   category = "13"
+                   category = "13",
+
                }
                );
              

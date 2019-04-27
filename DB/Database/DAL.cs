@@ -101,6 +101,7 @@ namespace DB.Database
         public static IEnumerable<Post> GetAllPosts(string userID)
         {
             var Posts = from post in db.Posts
+                        where post.ownerID == userID
                         select post;
 
             //bizlogic to sort according to most recent time
@@ -112,7 +113,7 @@ namespace DB.Database
         public static IEnumerable<Post> GetAllUnexpiredPosts(string userID)
         {
             var Posts = from post in db.Posts
-                        where !post.isDeletedOrHidden
+                        where !post.isDeletedOrHidden && post.ownerID == userID
                         select post;
 
             //bizlogic to sort according to most recent time
@@ -124,7 +125,7 @@ namespace DB.Database
         public static IEnumerable<Post> GetAllExpiredPosts(string userID)
         {
             var Posts = from post in db.Posts
-                        where post.isDeletedOrHidden
+                        where post.isDeletedOrHidden && post.ownerID == userID
                         select post;
 
             //bizlogic to sort according to most recent time
