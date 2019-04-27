@@ -37,7 +37,7 @@ namespace DB.Database
     public class DbLayer
     {
         private static ApplicationDbContext db = new ApplicationDbContext();
-
+        /* GetAllAreas: gets all the areas */
         public static IEnumerable<Area> GetAllAreas()
         {
             var Areas = from area in db.Areas
@@ -48,7 +48,7 @@ namespace DB.Database
 
             return orderedAreas;
         }
-
+        /* GetAllLocales: gets all the Locales */
         public static IEnumerable<Locale> GetAllLocales()
         {
             var Locales = from locale in db.Locales
@@ -59,7 +59,7 @@ namespace DB.Database
 
             return orderedlocales;
         }
-
+        /*GetAllCategories: gets all the categories */
         public static IEnumerable<Category> GetAllCategories()
         {
             var Categories = from category in db.Categories
@@ -70,7 +70,7 @@ namespace DB.Database
 
             return orderedCategories;
         }
-
+        /*GetsAllSubCategories: returns all the subcategories */
         public static IEnumerable<Subcategory> GetAllSubCategories()
         {
             var SubCategories = from subcategory in db.SubCategories
@@ -82,8 +82,9 @@ namespace DB.Database
             return orderedSubCategories;
         }
 
-        //Andrew how does this work?
-
+        
+        /*GetAllPosts:returns all the posts for a given category,subcategory,localeid, or areaId
+         * we will add methods that take into account the other combinations */
         //cID can be either categoryID or subcategoryID and lID can be either localeID or areaID
         public static IEnumerable<Post> GetAllPosts(string cID, string lID)
         {
@@ -97,7 +98,7 @@ namespace DB.Database
             return orderedPosts;
 
         }
-
+        /*GetAllPosts: returns all posts for a given user */
         public static IEnumerable<Post> GetAllPosts(string userID)
         {
             var Posts = from post in db.Posts
@@ -108,7 +109,7 @@ namespace DB.Database
 
             return orderedPosts;
         }
-        
+        /*GetAllUnexpiredPosts: returns all unexpired posts for a given user */
         public static IEnumerable<Post> GetAllUnexpiredPosts(string userID)
         {
             var Posts = from post in db.Posts
@@ -120,7 +121,7 @@ namespace DB.Database
 
             return orderedPosts;
         }
-
+        /* GetAllExpiredPosts: returns all the expired posts for a specific user */
         public static IEnumerable<Post> GetAllExpiredPosts(string userID)
         {
             var Posts = from post in db.Posts
@@ -132,7 +133,7 @@ namespace DB.Database
 
             return orderedPosts;
         }
-
+        /* GetMessagesToPost: returns all the messages for a given post */
         public static IEnumerable<Message> GetMessagesToPost(string postID)
         {
             //handle error cases
@@ -144,7 +145,7 @@ namespace DB.Database
 
             return orderedMessages;
         }
-
+        /* GetMessagesFromUser: returns all the messages for a given user */
         public static IEnumerable<Message> GetMessagesFromUser(string userID)
         {
             //handle error cases
@@ -156,7 +157,7 @@ namespace DB.Database
 
             return orderedMessages;
         }
-
+        /*SavePost: calculates when the expiration time will be for a given post */
         public static void SavePost(Post post)
         {
             //bizlogic to compute expiration time
@@ -268,6 +269,33 @@ namespace DB.Database
         {
             db.User.Add(user);
             db.SaveChanges();
+        }
+        /* getPost: gets the Post corresponding to the Post id */
+        public static Post getPost(int id)
+        {
+            var posts = from post in db.Posts
+                        where id == post.ID
+                        select post;
+            Post p = posts.FirstOrDefault();
+            return p;
+        }
+        /* getMessage: gets the Message corresponding to the Message Id */
+        public static Message getMessage(int msgId)
+        {
+            var messages = from msg in db.Messages
+                           where msgId == msg.messageID
+                           select msg;
+            Message m = messages.FirstOrDefault();
+            return m;
+        }
+        /* getUser: gets the User corresponding to the ID */
+        public static User getUser(int userId)
+        {
+            var users = from user in db.User
+                        where userId.ToString() == user.userID
+                        select user;
+            User u = users.FirstOrDefault();
+            return u;
         }
     }
 }
