@@ -51,6 +51,11 @@ namespace BizLogic.Logic
         {
             post.postExpiration = post.postTimestamp.AddDays(10); 
         }
+        /*
+        public static void setFlags(Post post, String userId)
+        {
+            post.flags.
+        }*/
 
        
     }

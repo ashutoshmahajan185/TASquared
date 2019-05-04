@@ -51,6 +51,11 @@ namespace Data.Models
 
         [DefaultValue(true)]
         public bool canBeModified { get; set; }
+        /*
+        public List<String> flags
+        {
+            get;set;
+        }*/
 
         public ICollection<Message> messages { get; set; }
 

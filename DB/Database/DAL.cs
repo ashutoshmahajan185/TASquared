@@ -222,6 +222,9 @@ namespace DB.Database
             lst = entities;
             return lst;
         }
+
+
+        
         /* addCategory: adding a new category */
         public static void addCategory(Category cat)
         {
