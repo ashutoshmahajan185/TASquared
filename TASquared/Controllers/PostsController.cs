@@ -16,6 +16,24 @@ namespace TASquared.Controllers
     //annotate class to allow anonymous as well as users to access actions
     public class PostsController : Controller
     {
+        public PostsController()
+        {
+            var areas = DbLayer.GetAllAreas();
+            var locales = DbLayer.GetAllLocales();
+            var cat = DbLayer.GetAllCategories();
+            var subcat = DbLayer.GetAllSubCategories();
+
+            var layoutViewModel = new LayoutViewModel
+            {
+                areas = areas,
+                locales = locales,
+                categories = cat,
+                subcategories = subcat
+            };
+
+            ViewBag.layoutViewModel = layoutViewModel;
+        }
+
         //need to think how to do this for other permutations of (area,locale) and (cat,subcat)
         // GET: List Posts
         public ActionResult Index(string area_id, string category_id )

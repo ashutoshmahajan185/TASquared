@@ -14,6 +14,23 @@ namespace TASquared.Controllers
     //Inbox(GetPostsWithMessages, ViewMessagesForPost)
     public class InboxController : Controller
     {
+        public InboxController()
+        {
+            var areas = DbLayer.GetAllAreas();
+            var locales = DbLayer.GetAllLocales();
+            var cat = DbLayer.GetAllCategories();
+            var subcat = DbLayer.GetAllSubCategories();
+
+            var layoutViewModel = new LayoutViewModel
+            {
+                areas = areas,
+                locales = locales,
+                categories = cat,
+                subcategories = subcat
+            };
+
+            ViewBag.layoutViewModel = layoutViewModel;
+        }
 
         // GET: Inbox, GetPostsWithMessages
         public ActionResult Index(string userid)
