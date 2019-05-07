@@ -12,6 +12,7 @@ namespace Data.Models
     public class Area
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         //Add back database generated 
         public String areaID { get; set; }
 

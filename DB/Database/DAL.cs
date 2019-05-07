@@ -59,6 +59,12 @@ namespace DB.Database
 
             return orderedlocales;
         }
+
+        public static bool CheckIfPostsExists(int? id)
+        {
+            throw new NotImplementedException();
+        }
+
         /*GetAllCategories: gets all the categories */
         public static IEnumerable<Category> GetAllCategories()
         {
@@ -135,7 +141,7 @@ namespace DB.Database
             return orderedPosts;
         }
         /* GetMessagesToPost: returns all the messages for a given post */
-        public static IEnumerable<Message> GetMessagesToPost(string postID)
+        public static IEnumerable<Message> GetMessagesToPost(int postID)
         {
             //handle error cases
             var Post = db.Posts.Find(postID);
@@ -191,7 +197,7 @@ namespace DB.Database
             db.SaveChanges();
         }
         /* deletePost: setting the isDeletedorHidden property to true from db */
-        public static void deletePost(string postId)
+        public static void deletePost(int postId)
         {
             var post = db.Posts.Find(postId);
             post.isDeletedOrHidden = true;
@@ -300,6 +306,31 @@ namespace DB.Database
                         select user;
             User u = users.FirstOrDefault();
             return u;
+        }
+
+        public static bool CheckIfAreaExists(string area_id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static bool CheckIfCategoryExists(string category_id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static bool CheckIfUserExists(string userid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static object getAllPostsWithResponsesForUser(string userid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static object getPostsUserRespondedTo(string userid)
+        {
+            throw new NotImplementedException();
         }
     }
 }

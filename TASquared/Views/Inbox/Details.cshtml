@@ -1,0 +1,50 @@
+﻿@model Data.Models.Message
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Message</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.messageTimestamp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.messageTimestamp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.senderID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.senderID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.receiverID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.receiverID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.body)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.body)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.messageID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

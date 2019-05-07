@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Data.Models.Message>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.messageTimestamp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.senderID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.receiverID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.body)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.messageTimestamp)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.senderID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.receiverID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.body)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.messageID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.messageID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.messageID })
+        </td>
+    </tr>
+}
+
+</table>

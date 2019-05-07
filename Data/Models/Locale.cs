@@ -13,6 +13,7 @@ namespace Data.Models
     {
         [Key]
         //Add back database generated 
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public String localeID { get; set; }
 
         [DefaultValue("")]
