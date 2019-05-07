@@ -155,5 +155,49 @@ namespace TASquared.Controllers
             DbLayer.deletePost(id);
             return RedirectToAction("Index");
         }
+
+        //GET Posts/Respond/5
+        public ActionResult Respond(int? id)
+        {
+            //handle errors
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            if (!DbLayer.CheckIfPostsExists((int)id))
+            {
+                return HttpNotFound();
+            }
+
+            Post post = DbLayer.getPost((int)id);
+            return View(post);
+        }
+
+        //POST
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Respond([Bind(Include = "messageID,messageTimestamp,senderID,receiverID,body")] Message message, string area_id, string category_id, int? id)
+        {
+            //handle errors
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            if (!DbLayer.CheckIfPostsExists((int)id))
+            {
+                return HttpNotFound();
+            }
+
+            Post post = DbLayer.getPost((int)id);
+            ViewBag.Message = message;
+
+            if(ModelState.IsValid)
+            {
+                DbLayer.addMessageForPost((int)id, message);
+                DbLayer.addMessageForUser(message.senderID, message);
+                return RedirectToAction("Details", new { area_id = area_id, category_id = category_id, id = id });
+            }
+            return View(post);
+        }
     }
 }

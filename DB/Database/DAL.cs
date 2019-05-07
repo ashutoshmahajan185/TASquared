@@ -176,12 +176,18 @@ namespace DB.Database
 
 
         /*addMessageForPost: adding a message for a specific posting*/
-        public static void addMessageForPost(string postId, Message msg)
+        public static void addMessageForPost(int postId, Message msg)
         {
             var post = db.Posts.Find(postId);
             post.messages.Add(msg);
             db.SaveChanges();
         }
+
+        public static void SaveMessage(Message message)
+        {
+            throw new NotImplementedException();
+        }
+
         /*addMessageForUser: adding a message for a specific user*/
         public static void addMessageForUser(string userId, Message msg)
         {
@@ -310,27 +316,66 @@ namespace DB.Database
 
         public static bool CheckIfAreaExists(string area_id)
         {
-            throw new NotImplementedException();
+            var area = db.Areas.Find(area_id);
+            if (area == null)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public static bool CheckIfCategoryExists(string category_id)
         {
-            throw new NotImplementedException();
+            var cat = db.Categories.Find(category_id);
+            if (cat == null)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public static bool CheckIfUserExists(string userid)
         {
-            throw new NotImplementedException();
+            var user = db.Users.Find(userid);
+            if (user == null)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public static object getAllPostsWithResponsesForUser(string userid)
         {
-            throw new NotImplementedException();
+            var AllPosts = getPosts(userid);
+            var Posts = new List<Post>();
+
+            foreach(var p in AllPosts)
+            {
+                if (p.messages.ToList().Count != 0)
+                {
+                    Posts.Add(p);
+                }
+            }
+
+            return Posts;
         }
 
         public static object getPostsUserRespondedTo(string userid)
         {
-            throw new NotImplementedException();
+            var AllMessages = GetMessagesFromUser(userid);
+            var Posts = new List<Post>();
+
+            foreach(var m in AllMessages)
+            {
+                int postid = m.postID;
+                var post = getPost(postid);
+                Posts.Add(post);
+            }
+
+            return Posts;
         }
     }
 }
