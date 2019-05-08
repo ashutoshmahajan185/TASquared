@@ -60,9 +60,33 @@ namespace DB.Database
             return orderedlocales;
         }
 
-        public static bool CheckIfPostsExists(int? id)
+        public static bool CheckIfSubCategoryExists(string category_id)
+        {
+            var subcat = db.SubCategories.Find(category_id);
+
+            if (subcat == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public static object GetAllPosts(string category_id, string area_id, string place, string type)
         {
             throw new NotImplementedException();
+        }
+
+        public static bool CheckIfPostsExists(int id)
+        {
+            var post = db.Posts.Find(id);
+
+            if (post == null)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         /*GetAllCategories: gets all the categories */
@@ -76,6 +100,19 @@ namespace DB.Database
 
             return orderedCategories;
         }
+
+        public static bool CheckIfLocaleExists(string locale_id)
+        {
+            var locale = db.Locales.Find(locale_id);
+
+            if (locale == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         /*GetsAllSubCategories: returns all the subcategories */
         public static IEnumerable<Subcategory> GetAllSubCategories()
         {
@@ -88,7 +125,16 @@ namespace DB.Database
             return orderedSubCategories;
         }
 
-        
+        public static object getPostsForLocale(string locale_id)
+        {
+            var posts = from post in db.Posts
+                        where post.locale == locale_id
+                        select post;
+
+            return posts.ToList();
+        }
+
+
         /*GetAllPosts:returns all the posts for a given category,subcategory,localeid, or areaId
          * we will add methods that take into account the other combinations */
         //cID can be either categoryID or subcategoryID and lID can be either localeID or areaID
@@ -116,6 +162,25 @@ namespace DB.Database
 
             return orderedPosts;
         }
+
+        public static object getPostsForCategory(string category_id)
+        {
+            var posts = from post in db.Posts
+                        where post.category == category_id
+                        select post;
+
+            return posts.ToList();
+        }
+
+        public static object getPostsForSubCategory(string category_id)
+        {
+            var posts = from post in db.Posts
+                        where post.subcategory == category_id
+                        select post;
+
+            return posts.ToList();
+        }
+
         /*GetAllUnexpiredPosts: returns all unexpired posts for a given user */
         public static IEnumerable<Post> GetAllUnexpiredPosts(string userID)
         {
