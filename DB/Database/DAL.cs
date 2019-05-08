@@ -49,6 +49,24 @@ namespace DB.Database
             return a;
         }
 
+        public static Category getCategory(string catID)
+        {
+            var temp = from cat in db.Categories
+                       where catID == cat.categoryID
+                       select cat;
+            Category c = temp.FirstOrDefault();
+            return c;
+        }
+
+        public static Subcategory getSubcategory(string subID)
+        {
+            var temp = from sub in db.SubCategories
+                       where subID == sub.subCategoryID
+                       select sub;
+            Subcategory s = temp.FirstOrDefault();
+            return s;
+        }
+
 
         /* GetAllAreas: gets all the areas */
         public static IEnumerable<Area> GetAllAreas()
@@ -248,6 +266,22 @@ namespace DB.Database
             db.Entry(area).State = EntityState.Modified;
             db.SaveChanges();
         }
+
+        public static void saveLocale(Locale loc)
+        {
+            db.Entry(loc).State = EntityState.Modified;
+            db.SaveChanges();
+        }
+        public static void saveCategory(Category cat)
+        {
+            db.Entry(cat).State = EntityState.Modified;
+            db.SaveChanges();
+        }
+        public static void saveSubcategory(Subcategory sub)
+        {
+            db.Entry(sub).State = EntityState.Modified;
+            db.SaveChanges();
+        }
         /*SavePost: calculates when the expiration time will be for a given post */
         public static void SavePost(Post post)
         {
@@ -292,6 +326,27 @@ namespace DB.Database
         {
             var area = db.Areas.Find(areaId);
             area.isDeletedOrHidden = true;
+            db.SaveChanges();
+        }
+
+        public static void deleteCategory(string catId)
+        {
+            var cat = db.Categories.Find(catId);
+            cat.isDeletedOrHidden = true;
+            db.SaveChanges();
+        }
+
+        public static void deleteSubcategory(string subId)
+        {
+            var sub = db.SubCategories.Find(subId);
+            sub.isDeletedOrHidden = true;
+            db.SaveChanges();
+        }
+
+        public static void deleteLocale(string locId)
+        {
+            var loc = db.Locales.Find(locId);
+            loc.isDeletedOrHidden = true;
             db.SaveChanges();
         }
 
@@ -379,6 +434,8 @@ namespace DB.Database
             db.User.Add(user);
             db.SaveChanges();
         }
+
+        
         /* getPost: gets the Post corresponding to the Post id */
         public static Post getPost(int id)
         {
@@ -387,6 +444,16 @@ namespace DB.Database
                         select post;
             Post p = posts.FirstOrDefault();
             return p;
+        }
+
+        /* getLocale: gets the Locale corresponding to the Locale id */
+        public static Locale getLocale(string id)
+        {
+            var locales = from locale in db.Locales
+                        where id == locale.localeID
+                        select locale;
+            Locale loc = locales.FirstOrDefault();
+            return loc;
         }
         /* getMessage: gets the Message corresponding to the Message Id */
         public static Message getMessage(int msgId)

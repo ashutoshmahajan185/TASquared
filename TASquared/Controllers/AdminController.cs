@@ -8,121 +8,126 @@ using System.Web;
 using System.Web.Mvc;
 using DB.Database;
 using Data.Models;
-
+//used User model
 namespace TASquared.Controllers
 {
-    public class LocalesController : Controller
+    public class AdminController : Controller
     {
         //private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Locales
+        // GET: Admin
         public ActionResult Index()
         {
-            var locales = DbLayer.GetAllLocales();
-            return View(locales);
+           
+            LayoutViewModel mymodel = new LayoutViewModel();
+            mymodel.areas = DbLayer.GetAllAreas();
+            mymodel.categories = DbLayer.GetAllCategories();
+            mymodel.subcategories = DbLayer.GetAllSubCategories();
+            mymodel.locales = DbLayer.GetAllLocales();
+            mymodel.posts = DbLayer.GetAllPosts();
+            mymodel.users = DbLayer.getAllUsers();
+            return View(mymodel);
+            
         }
 
-        // GET: Locales/Details/5
-
+        // GET: Admin/Details/5
+        //Allows admin to view User's information
+            //user id in model should be string?
+        public ActionResult Details(int id)
+        {  
             /*
-        public ActionResult Details(string id)
-        {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Locale locale = db.Locales.Find(id);
-            if (locale == null)
+            }*/
+            User user = DbLayer.getUser(id);
+            if (user == null)
             {
                 return HttpNotFound();
             }
-            return View(locale);
-        }*/
-
-        // GET: Locales/Create
+            return View(user);
+        }
+        /*
+        // GET: Admin/Create
         public ActionResult Create()
         {
             return View();
         }
-
-        // POST: Locales/Create
+        
+        // POST: Admin/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "localeID,name")] Locale locale)
+        public ActionResult Create([Bind(Include = "userID,userRole,phoneNumber,email")] User user)
         {
             if (ModelState.IsValid)
             {
-
-                DbLayer.addLocale(locale);
+                db.User.Add(user);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-           
-
-            return View(locale);
+            return View(user);
         }
+        */
+        // GET: Admin/Edit/5
 
-        // GET: Locales/Edit/5
-        public ActionResult Edit(string id)
+        //Admin should be able to modify a area, a locale, a category or subcategory 
+        //overloaded Edit method?
+        public ActionResult Edit(string area_id)
         {
-            if (id == null)
+            if (area_id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            if (!DbLayer.CheckIfLocaleExists(id))
+            if (!DbLayer.CheckIAreaExists(area_id))
             {
                 return HttpNotFound();
             }
-
-            Locale loc = DbLayer.getLocale(id);
-            if (loc == null)
-            {
-                return HttpNotFound();
-            }
-            return View();
+            return View(DbLayer.getArea(area_id));
         }
 
-        // POST: Locales/Edit/5
+        // POST: Admin/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "localeID,name")] Locale locale)
+        public ActionResult Edit([Bind(Include = "userID,userRole,phoneNumber,email")] User user)
         {
             if (ModelState.IsValid)
             {
-                DbLayer.saveLocale(locale);
+                db.Entry(user).State = EntityState.Modified;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(locale);
+            return View(user);
         }
 
-        // GET: Locales/Delete/5
+        // GET: Admin/Delete/5
         public ActionResult Delete(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            Locale loc = DbLayer.getLocale(id);
-            if (loc == null)
+            User user = db.User.Find(id);
+            if (user == null)
             {
                 return HttpNotFound();
             }
-            return View(loc);
+            return View(user);
         }
 
-        // POST: Locales/Delete/5
+        // POST: Admin/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-
-            DbLayer.deleteLocale(id);
+            User user = db.User.Find(id);
+            db.User.Remove(user);
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
         /*

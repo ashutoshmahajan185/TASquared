@@ -16,5 +16,9 @@ namespace Data.Models
 
         public IEnumerable<Subcategory> subcategories { get; set; }
 
+        public IEnumerable<Post> posts { get; set; }
+
+        public IEnumerable<User> users { get; set; }
+
     }
 }

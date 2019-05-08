@@ -11,60 +11,58 @@ using Data.Models;
 
 namespace TASquared.Controllers
 {
-    public class LocalesController : Controller
+    public class CategoriesController : Controller
     {
         //private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Locales
+        // GET: Categories
         public ActionResult Index()
         {
-            var locales = DbLayer.GetAllLocales();
-            return View(locales);
+            var categories = DbLayer.GetAllCategories();
+            return View(categories);
         }
-
-        // GET: Locales/Details/5
-
-            /*
+        /*
+        // GET: Categories/Details/5
         public ActionResult Details(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Locale locale = db.Locales.Find(id);
-            if (locale == null)
+            Category category = db.Categories.Find(id);
+            if (category == null)
             {
                 return HttpNotFound();
             }
-            return View(locale);
-        }*/
-
-        // GET: Locales/Create
+            return View(category);
+        }
+        */
+        // GET: Categories/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Locales/Create
+        // POST: Categories/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "localeID,name")] Locale locale)
+        public ActionResult Create([Bind(Include = "categoryID,name")] Category category)
         {
             if (ModelState.IsValid)
             {
 
-                DbLayer.addLocale(locale);
+                DbLayer.addCategory(category);
                 return RedirectToAction("Index");
             }
 
-           
 
-            return View(locale);
+
+            return View(category);
         }
 
-        // GET: Locales/Edit/5
+        // GET: Categories/Edit/5
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -77,30 +75,30 @@ namespace TASquared.Controllers
                 return HttpNotFound();
             }
 
-            Locale loc = DbLayer.getLocale(id);
-            if (loc == null)
+            Category cat = DbLayer.getCategory(id);
+            if (cat == null)
             {
                 return HttpNotFound();
             }
             return View();
         }
 
-        // POST: Locales/Edit/5
+        // POST: Categories/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "localeID,name")] Locale locale)
+        public ActionResult Edit([Bind(Include = "categoryID,name")] Category category)
         {
             if (ModelState.IsValid)
             {
-                DbLayer.saveLocale(locale);
+                DbLayer.saveCategory(category);
                 return RedirectToAction("Index");
             }
-            return View(locale);
+            return View(category);
         }
 
-        // GET: Locales/Delete/5
+        // GET: Categories/Delete/5
         public ActionResult Delete(string id)
         {
             if (id == null)
@@ -108,21 +106,20 @@ namespace TASquared.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Locale loc = DbLayer.getLocale(id);
-            if (loc == null)
+            Category cat = DbLayer.getCategory(id);
+            if (cat == null)
             {
                 return HttpNotFound();
             }
-            return View(loc);
+            return View(cat);
         }
 
-        // POST: Locales/Delete/5
+        // POST: Categories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-
-            DbLayer.deleteLocale(id);
+            DbLayer.deleteCategory(id);
             return RedirectToAction("Index");
         }
         /*

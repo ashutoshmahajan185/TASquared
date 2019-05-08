@@ -11,60 +11,58 @@ using Data.Models;
 
 namespace TASquared.Controllers
 {
-    public class LocalesController : Controller
+    public class SubcategoriesController : Controller
     {
         //private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Locales
+        // GET: Subcategories
         public ActionResult Index()
         {
-            var locales = DbLayer.GetAllLocales();
-            return View(locales);
+            var subcats = DbLayer.GetAllSubCategories();
+            return View(subcats);
         }
-
-        // GET: Locales/Details/5
-
-            /*
+        /*
+        // GET: Subcategories/Details/5
         public ActionResult Details(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Locale locale = db.Locales.Find(id);
-            if (locale == null)
+            Subcategory subcategory = db.SubCategories.Find(id);
+            if (subcategory == null)
             {
                 return HttpNotFound();
             }
-            return View(locale);
+            return View(subcategory);
         }*/
 
-        // GET: Locales/Create
+        // GET: Subcategories/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Locales/Create
+        // POST: Subcategories/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "localeID,name")] Locale locale)
+        public ActionResult Create([Bind(Include = "subCategoryID,name")] Subcategory subcategory)
         {
             if (ModelState.IsValid)
             {
 
-                DbLayer.addLocale(locale);
+                DbLayer.addSubcategory(subcategory);
                 return RedirectToAction("Index");
             }
 
-           
 
-            return View(locale);
+
+            return View(subcategory);
         }
 
-        // GET: Locales/Edit/5
+        // GET: Subcategories/Edit/5
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -77,30 +75,30 @@ namespace TASquared.Controllers
                 return HttpNotFound();
             }
 
-            Locale loc = DbLayer.getLocale(id);
-            if (loc == null)
+            Subcategory sub = DbLayer.getSubcategory(id);
+            if (sub == null)
             {
                 return HttpNotFound();
             }
             return View();
         }
 
-        // POST: Locales/Edit/5
+        // POST: Subcategories/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "localeID,name")] Locale locale)
+        public ActionResult Edit([Bind(Include = "subCategoryID,name")] Subcategory subcategory)
         {
             if (ModelState.IsValid)
             {
-                DbLayer.saveLocale(locale);
+                DbLayer.saveSubcategory(subcategory);
                 return RedirectToAction("Index");
             }
-            return View(locale);
+            return View(subcategory);
         }
 
-        // GET: Locales/Delete/5
+        // GET: Subcategories/Delete/5
         public ActionResult Delete(string id)
         {
             if (id == null)
@@ -108,21 +106,20 @@ namespace TASquared.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Locale loc = DbLayer.getLocale(id);
-            if (loc == null)
+            Subcategory sub = DbLayer.getSubcategory(id);
+            if (sub == null)
             {
                 return HttpNotFound();
             }
-            return View(loc);
+            return View(sub);
         }
 
-        // POST: Locales/Delete/5
+        // POST: Subcategories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-
-            DbLayer.deleteLocale(id);
+            DbLayer.deleteSubcategory(id);
             return RedirectToAction("Index");
         }
         /*

@@ -22,6 +22,9 @@ namespace Data.Models
             get; set;
         }
 
+        [DefaultValue(false)]
+        public bool isDeletedOrHidden { get; set; }
+
         public ICollection<Post> posts
         {
             get; set;

@@ -23,6 +23,11 @@ namespace Data.Models
         {
             get; set;
         }
+
+        [DefaultValue(false)]
+        public bool isDeletedOrHidden { get; set; }
+
+
         public virtual ICollection<Subcategory> subcategories
         {
             get; set;
