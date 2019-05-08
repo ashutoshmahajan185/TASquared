@@ -16,7 +16,7 @@ namespace TASquared
             //.com/Area/id1/Category/id2/List/userid
             routes.MapRoute(
                 name: "Posts",
-                url: "Area/{area_id}/Category/{category_id}/{action}/{id}",
+                url: "{Place}/{area_id}/{Type}/{category_id}/{action}/{id}",
                 defaults: new { controller = "Posts", action = "Index", id = UrlParameter.Optional }
             );
 

@@ -36,21 +36,120 @@ namespace TASquared.Controllers
 
         //need to think how to do this for other permutations of (area,locale) and (cat,subcat)
         // GET: List Posts
-        public ActionResult Index(string area_id, string category_id )
+        public ActionResult Index(string area_id, string category_id, string Place, string Type)
         {
             //handle errors and edgecases
-            
-            if (area_id == null)
+
+            if (area_id == null || category_id == null || Place == null || Type == null)
             {
                 return HttpNotFound();
             }
-            //add back category change 
-            else if (!DbLayer.CheckIfAreaExists(area_id))
+            
+            if(Place == "Area" && Type == "Category")
+            {
+                if (!DbLayer.CheckIfAreaExists(area_id) || !DbLayer.CheckIfCategoryExists(category_id))
+                {
+                    return HttpNotFound();
+                }
+
+                return View(DbLayer.GetAllPosts(category_id, area_id));
+            }
+
+            else if (Place == "Area" && Type == "SubCategory")
+            {
+                if (!DbLayer.CheckIfAreaExists(area_id) || !DbLayer.CheckIfSubCategoryExists(category_id))
+                {
+                    return HttpNotFound();
+                }
+
+                return View(DbLayer.GetAllPosts(category_id, area_id, Place, Type));
+            }
+
+            else if (Place == "Locale" && Type == "Category")
+            {
+                if (!DbLayer.CheckIfLocaleExists(area_id) || !DbLayer.CheckIfCategoryExists(category_id))
+                {
+                    return HttpNotFound();
+                }
+
+                return View(DbLayer.GetAllPosts(category_id, area_id, Place, Type));
+            }
+
+            else if (Place == "Locale" && Type == "SubCategory")
+            {
+                if (!DbLayer.CheckIfLocaleExists(area_id) || !DbLayer.CheckIfSubCategoryExists(category_id))
+                {
+                    return HttpNotFound();
+                }
+
+                return View(DbLayer.GetAllPosts(category_id, area_id, Place, Type));
+            }
+
+            return HttpNotFound();
+        }
+
+        [ActionName("IndexGivenPlaceOnly")]
+        public ActionResult Index(string area_id, string Place)
+        {
+            //handle errors and edgecases
+            
+            if (area_id == null || Place == null)
+            {
+                return HttpNotFound();
+            }
+            
+            if (Place == "Area")
+            {
+                if (!DbLayer.CheckIfAreaExists(area_id))
+                {
+                    return HttpNotFound();
+                }
+
+                return View("Index", DbLayer.getPostsForArea(area_id));
+            }
+            else if (Place == "Locale")
+            {
+                if (!DbLayer.CheckIfLocaleExists(area_id))
+                {
+                    return HttpNotFound();
+                }
+
+                return View("Index", DbLayer.getPostsForLocale(area_id));
+            }
+
+            return HttpNotFound();
+        }
+
+        [ActionName("IndexGivenTypeOnly")]
+        public ActionResult Index(string Place, string Type, string category_id)
+        {
+            //handle errors and edgecases
+
+            if (category_id == null || Type == null || Place != null)
             {
                 return HttpNotFound();
             }
 
-            return View(DbLayer.getPostsForArea(area_id));
+            if (Type == "Category")
+            {
+                if (!DbLayer.CheckIfCategoryExists(category_id))
+                {
+                    return HttpNotFound();
+                }
+
+                return View("Index", DbLayer.getPostsForCategory(category_id));
+            }
+            else if (Type == "SubCategory")
+            {
+                if (!DbLayer.CheckIfSubCategoryExists(category_id))
+                {
+                    return HttpNotFound();
+                }
+
+                return View("Index", DbLayer.getPostsForSubCategory(category_id));
+            }
+
+            return HttpNotFound();
         }
 
         //viewing a post
@@ -70,7 +169,7 @@ namespace TASquared.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            else if (!DbLayer.CheckIfPostsExists(id))
+            else if (!DbLayer.CheckIfPostsExists((int)id))
             {
                 return HttpNotFound();
             }

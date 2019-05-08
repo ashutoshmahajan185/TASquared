@@ -33,38 +33,38 @@
     </div>
     <div class="container body-content">
 
-        @Html.Display("Areas")
+        <p>@Html.DisplayName("Areas")</p>
 
         @foreach (var item in model.areas)
         {
             // @Html.DisplayFor(modelitem => item.name)
-            @Html.ActionLink(item.name.ToString(), "Index", "Posts", new { area_id = item.areaID }, null)
+            @Html.ActionLink(item.name.ToString(), "IndexGivenPlaceOnly", "Posts", new { area_id = item.areaID, Place = "Area" }, null)
         }
 
-        @Html.Display("Locales")
+        <p>@Html.DisplayName("Locales")</p>
 
         @foreach (var item in model.locales)
         {
-            @Html.DisplayFor(modelitem => item.name)
+            //@Html.DisplayFor(modelitem => item.name)
 
             
-           // @Html.ActionLink(item.name.ToString(), "Index", "Posts", new { area_id = item.areaID }, null)
+           @Html.ActionLink(item.name.ToString(), "IndexGivenPlaceOnly", "Posts", new { area_id = item.localeID, Place = "Locale" }, null)
         }
 
-        @Html.Display("Categories")
+        <p>@Html.DisplayName("Categories")</p>
 
         @foreach (var item in model.categories)
         {
-            @Html.DisplayFor(modelitem => item.name)
-           // @Html.ActionLink(item.name.ToString(), "Index", "Posts", new { area_id = item.areaID }, null)
+           // @Html.DisplayFor(modelitem => item.name)
+            @Html.ActionLink(item.name.ToString(), "IndexGivenTypeOnly", "Posts", new { category_id = item.categoryID, Type = "Category" }, null)
         }
 
-        @Html.Display("SubCategories")
+        <p>@Html.DisplayName("SubCategories")</p>
 
         @foreach (var item in model.subcategories)
         {
-            @Html.DisplayFor(modelitem => item.name)
-           // @Html.ActionLink(item.name.ToString(), "Index", "Posts", new { area_id = item.areaID }, null)
+            //@Html.DisplayFor(modelitem => item.name)
+            @Html.ActionLink(item.name.ToString(), "IndexGivenTypeOnly", "Posts", new { category_id = item.subCategoryID, Type = "SubCategory" }, null)
         }
 
 
