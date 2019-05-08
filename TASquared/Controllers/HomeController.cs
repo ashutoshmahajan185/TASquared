@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DB.Database;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,11 +7,14 @@ using System.Web.Mvc;
 
 namespace TASquared.Controllers
 {
-    public class HomeController : Controller
-    {
+    public class HomeController : Controller {
+        //private static ApplicationDbContext db = new ApplicationDbContext();
+    
         public ActionResult Index()
         {
-            return View();
+        // need to pass the area 
+       
+        return View(DbLayer.GetAllLocales());
         }
 
         public ActionResult About()
