@@ -167,8 +167,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AreasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InboxController.cs" />
+    <Compile Include="Controllers\LocalesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PostsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -245,6 +247,15 @@
     <Content Include="Views\Inbox\Edit.cshtml" />
     <Content Include="Views\Inbox\Index.cshtml" />
     <Content Include="Views\Posts\Respond.cshtml" />
+    <Content Include="Views\Areas\Create.cshtml" />
+    <Content Include="Views\Areas\Delete.cshtml" />
+    <Content Include="Views\Areas\Edit.cshtml" />
+    <Content Include="Views\Areas\Index.cshtml" />
+    <Content Include="Views\Locales\Create.cshtml" />
+    <Content Include="Views\Locales\Delete.cshtml" />
+    <Content Include="Views\Locales\Details.cshtml" />
+    <Content Include="Views\Locales\Edit.cshtml" />
+    <Content Include="Views\Locales\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

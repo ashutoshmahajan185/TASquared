@@ -37,6 +37,19 @@ namespace DB.Database
     public class DbLayer
     {
         private static ApplicationDbContext db = new ApplicationDbContext();
+        
+
+        //get a specific area based on an areaID from the area container
+        public static Area getArea(string areaID)
+        {
+            var temp = from area in db.Areas
+                       where areaID == area.areaID
+                       select area;
+            Area a = temp.FirstOrDefault();
+            return a;
+        }
+
+
         /* GetAllAreas: gets all the areas */
         public static IEnumerable<Area> GetAllAreas()
         {
@@ -164,6 +177,12 @@ namespace DB.Database
 
             return orderedMessages;
         }
+
+        public static void saveArea(Area area)
+        {
+            db.Entry(area).State = EntityState.Modified;
+            db.SaveChanges();
+        }
         /*SavePost: calculates when the expiration time will be for a given post */
         public static void SavePost(Post post)
         {
@@ -202,6 +221,15 @@ namespace DB.Database
             user.userRole = "Admin";
             db.SaveChanges();
         }
+
+        /* deleteArea: setting the isDeletedorHidden property to true from db */
+        public static void deleteArea(string areaId)
+        {
+            var area = db.Areas.Find(areaId);
+            area.isDeletedOrHidden = true;
+            db.SaveChanges();
+        }
+
         /* deletePost: setting the isDeletedorHidden property to true from db */
         public static void deletePost(int postId)
         {
