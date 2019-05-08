@@ -90,10 +90,10 @@ namespace DB.Migrations
 
 
             context.Messages.AddOrUpdate(x => x.messageID,
-             new Message() { messageID = 321, messageTimestamp = dt.AddDays(24), senderID="4", receiverID="19", body = "Ouch that's expensive!" },
-             new Message() { messageID = 41, messageTimestamp = dt.AddDays(9), senderID = "23", receiverID = "21", body = "I want a Tesla" },
-             new Message() { messageID = 721, messageTimestamp = dt.AddDays(5), senderID = "17", receiverID = "43", body = "Let's play Rock Band" },
-             new Message() { messageID = 32, messageTimestamp = dt.AddDays(12), senderID = "62", receiverID = "67", body = "I want to learn .NET" }
+             new Message() { messageID = 321, messageTimestamp = dt.AddDays(24), senderID="4", receiverID=19, body = "Ouch that's expensive!" },
+             new Message() { messageID = 41, messageTimestamp = dt.AddDays(9), senderID = "23", receiverID = 21, body = "I want a Tesla" },
+             new Message() { messageID = 721, messageTimestamp = dt.AddDays(5), senderID = "17", receiverID = 43, body = "Let's play Rock Band" },
+             new Message() { messageID = 32, messageTimestamp = dt.AddDays(12), senderID = "62", receiverID = 67, body = "I want to learn .NET" }
              
              );
             //  This method will be called after migrating to the latest version.

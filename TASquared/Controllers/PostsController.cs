@@ -39,16 +39,18 @@ namespace TASquared.Controllers
         public ActionResult Index(string area_id, string category_id )
         {
             //handle errors and edgecases
-            if (area_id == null || category_id == null)
+            
+            if (area_id == null)
             {
                 return HttpNotFound();
             }
-            else if(!DbLayer.CheckIfAreaExists(area_id) || !DbLayer.CheckIfCategoryExists(category_id))
+            //add back category change 
+            else if (!DbLayer.CheckIfAreaExists(area_id))
             {
                 return HttpNotFound();
             }
 
-            return View(DbLayer.GetAllPosts(area_id, category_id));
+            return View(DbLayer.getPostsForArea(area_id));
         }
 
         //viewing a post

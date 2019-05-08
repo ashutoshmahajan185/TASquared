@@ -347,6 +347,14 @@ namespace DB.Database
             return true;
         }
 
+        public static IEnumerable<Post> getPostsForArea(string areaid)
+        {
+            var posts = from post in db.Posts
+                        where post.area == areaid
+                        select post;
+            return posts.ToList();
+        }
+
         public static object getAllPostsWithResponsesForUser(string userid)
         {
             var AllPosts = getPosts(userid);
@@ -370,7 +378,7 @@ namespace DB.Database
 
             foreach(var m in AllMessages)
             {
-                int postid = m.postID;
+                int postid = m.receiverID;
                 var post = getPost(postid);
                 Posts.Add(post);
             }

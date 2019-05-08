@@ -14,7 +14,7 @@ namespace Data.Models
 
         [Key]
         //Add back database generated
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+       // [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
         [Required]
