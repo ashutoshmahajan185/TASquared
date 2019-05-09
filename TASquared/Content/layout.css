@@ -1,6 +1,19 @@
 ﻿// Make each area overflow horizontally and
 // have the ability to have other items
 // scrolled into view
+
+
+
+.filter {
+    border: thin;
+    background-color: beige;
+        
+}
+
+.dynamic {
+    border: thin;
+}
+
 .scroll {
   white-space: nowrap;
   overflow-x: auto;
