@@ -6,11 +6,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - TA Squared</title>
+    <link rel="stylesheet" href="~/Content/layout.css"/>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
+
 </head>
 <body>
+    <h1 id="test">"HELLO WORLD"</h1>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -34,32 +37,55 @@
 
     <div class="container body-content">
 
-        <p>@Html.DisplayName("Areas")</p>
+        <div class='container example-one'>
+            
+            <header class='example-one-header scroll'>
 
-        @foreach (var item in model.areas)
-        {
-            // @Html.DisplayFor(modelitem => item.name)
-            @Html.ActionLink(item.name.ToString(), "IndexGivenPlaceOnly", "Posts", new { area_id = item.areaID, Place = "Area" }, null)
-        }
+                <nav class='vertical-align-middle'>
+                    <span class='nav-item'>
+                        @foreach (var item in model.areas)
+                        {
+                            <span class="nav-item">
+                                @Html.ActionLink(item.name.ToString(), "IndexGivenPlaceOnly", "Posts", new { area_id = item.areaID, Place = "Area" }, null)
+                            </span>
+                        }
+                    </span>
 
+                </nav>
+            </header>
+        </div>
+
+
+        <div class='container example-one'>
+            
+            <header class='example-one-header scroll'>
+
+                <nav class='vertical-align-middle'>
+                    <span class='nav-item'>
+                        @foreach (var item in model.categories)
+                        {
+                            <span class="nav-item">
+                                @Html.ActionLink(item.name.ToString(), "IndexGivenTypeOnly", "Posts", new { category_id = item.categoryID, Type = "Category" }, null)
+                            </span>
+                        }
+                    </span>
+
+                </nav>
+            </header>
+        </div>
+        
+       
         <p>@Html.DisplayName("Locales")</p>
 
         @foreach (var item in model.locales)
         {
             //@Html.DisplayFor(modelitem => item.name)
 
-            
-           @Html.ActionLink(item.name.ToString(), "IndexGivenPlaceOnly", "Posts", new { area_id = item.localeID, Place = "Locale" }, null)
+
+            @Html.ActionLink(item.name.ToString(), "IndexGivenPlaceOnly", "Posts", new { area_id = item.localeID, Place = "Locale" }, null)
         }
 
-        <p>@Html.DisplayName("Categories")</p>
-
-        @foreach (var item in model.categories)
-        {
-           // @Html.DisplayFor(modelitem => item.name)
-            @Html.ActionLink(item.name.ToString(), "IndexGivenTypeOnly", "Posts", new { category_id = item.categoryID, Type = "Category" }, null)
-        }
-
+       
         <p>@Html.DisplayName("SubCategories")</p>
 
         @foreach (var item in model.subcategories)
