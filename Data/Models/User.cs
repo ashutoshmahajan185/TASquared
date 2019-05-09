@@ -11,6 +11,8 @@ namespace Data.Models
     public class User
     {
         [Required]
+        [Key]
+
         public String userID
         {
             get; set;

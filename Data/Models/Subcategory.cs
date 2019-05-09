@@ -14,6 +14,7 @@ namespace Data.Models
 
         [Key]
         //Add back database generated 
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public String subCategoryID { get; set; }
 
         [DefaultValue("")]
@@ -22,6 +23,8 @@ namespace Data.Models
             get; set;
         }
 
+        [DefaultValue(false)]
+        public bool isDeletedOrHidden { get; set; }
 
         public ICollection<Post> posts
         {

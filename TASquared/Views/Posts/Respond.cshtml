@@ -1,0 +1,116 @@
+﻿@model Data.Models.Post
+
+@{
+    var message = (Data.Models.Message)ViewBag.Message;
+    ViewBag.Title = "Respond";
+    Layout = "~/Views/Shared/layout2.cshtml";
+}
+
+<h2>Respond</h2>
+
+<div>
+    <h4>Post</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.postNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.postNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.postTimestamp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.postTimestamp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.postExpiration)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.postExpiration)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ownerID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ownerID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.body)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.body)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.area)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.area)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.locale)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.locale)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.category)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.category)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.subcategory)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.subcategory)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isDeletedOrHidden)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isDeletedOrHidden)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.canBeModified)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.canBeModified)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

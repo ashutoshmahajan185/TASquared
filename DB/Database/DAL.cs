@@ -37,6 +37,37 @@ namespace DB.Database
     public class DbLayer
     {
         private static ApplicationDbContext db = new ApplicationDbContext();
+        
+
+        //get a specific area based on an areaID from the area container
+        public static Area getArea(string areaID)
+        {
+            var temp = from area in db.Areas
+                       where areaID == area.areaID
+                       select area;
+            Area a = temp.FirstOrDefault();
+            return a;
+        }
+
+        public static Category getCategory(string catID)
+        {
+            var temp = from cat in db.Categories
+                       where catID == cat.categoryID
+                       select cat;
+            Category c = temp.FirstOrDefault();
+            return c;
+        }
+
+        public static Subcategory getSubcategory(string subID)
+        {
+            var temp = from sub in db.SubCategories
+                       where subID == sub.subCategoryID
+                       select sub;
+            Subcategory s = temp.FirstOrDefault();
+            return s;
+        }
+
+
         /* GetAllAreas: gets all the areas */
         public static IEnumerable<Area> GetAllAreas()
         {
@@ -59,6 +90,36 @@ namespace DB.Database
 
             return orderedlocales;
         }
+
+        public static bool CheckIfSubCategoryExists(string category_id)
+        {
+            var subcat = db.SubCategories.Find(category_id);
+
+            if (subcat == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public static object GetAllPosts(string category_id, string area_id, string place, string type)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static bool CheckIfPostsExists(int id)
+        {
+            var post = db.Posts.Find(id);
+
+            if (post == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         /*GetAllCategories: gets all the categories */
         public static IEnumerable<Category> GetAllCategories()
         {
@@ -70,6 +131,19 @@ namespace DB.Database
 
             return orderedCategories;
         }
+
+        public static bool CheckIfLocaleExists(string locale_id)
+        {
+            var locale = db.Locales.Find(locale_id);
+
+            if (locale == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         /*GetsAllSubCategories: returns all the subcategories */
         public static IEnumerable<Subcategory> GetAllSubCategories()
         {
@@ -82,7 +156,16 @@ namespace DB.Database
             return orderedSubCategories;
         }
 
-        
+        public static object getPostsForLocale(string locale_id)
+        {
+            var posts = from post in db.Posts
+                        where post.locale == locale_id
+                        select post;
+
+            return posts.ToList();
+        }
+
+
         /*GetAllPosts:returns all the posts for a given category,subcategory,localeid, or areaId
          * we will add methods that take into account the other combinations */
         //cID can be either categoryID or subcategoryID and lID can be either localeID or areaID
@@ -110,6 +193,25 @@ namespace DB.Database
 
             return orderedPosts;
         }
+
+        public static object getPostsForCategory(string category_id)
+        {
+            var posts = from post in db.Posts
+                        where post.category == category_id
+                        select post;
+
+            return posts.ToList();
+        }
+
+        public static object getPostsForSubCategory(string category_id)
+        {
+            var posts = from post in db.Posts
+                        where post.subcategory == category_id
+                        select post;
+
+            return posts.ToList();
+        }
+
         /*GetAllUnexpiredPosts: returns all unexpired posts for a given user */
         public static IEnumerable<Post> GetAllUnexpiredPosts(string userID)
         {
@@ -135,7 +237,7 @@ namespace DB.Database
             return orderedPosts;
         }
         /* GetMessagesToPost: returns all the messages for a given post */
-        public static IEnumerable<Message> GetMessagesToPost(string postID)
+        public static IEnumerable<Message> GetMessagesToPost(int postID)
         {
             //handle error cases
             var Post = db.Posts.Find(postID);
@@ -158,6 +260,28 @@ namespace DB.Database
 
             return orderedMessages;
         }
+
+        public static void saveArea(Area area)
+        {
+            db.Entry(area).State = EntityState.Modified;
+            db.SaveChanges();
+        }
+
+        public static void saveLocale(Locale loc)
+        {
+            db.Entry(loc).State = EntityState.Modified;
+            db.SaveChanges();
+        }
+        public static void saveCategory(Category cat)
+        {
+            db.Entry(cat).State = EntityState.Modified;
+            db.SaveChanges();
+        }
+        public static void saveSubcategory(Subcategory sub)
+        {
+            db.Entry(sub).State = EntityState.Modified;
+            db.SaveChanges();
+        }
         /*SavePost: calculates when the expiration time will be for a given post */
         public static void SavePost(Post post)
         {
@@ -170,12 +294,18 @@ namespace DB.Database
 
 
         /*addMessageForPost: adding a message for a specific posting*/
-        public static void addMessageForPost(string postId, Message msg)
+        public static void addMessageForPost(int postId, Message msg)
         {
             var post = db.Posts.Find(postId);
             post.messages.Add(msg);
             db.SaveChanges();
         }
+
+        public static void SaveMessage(Message message)
+        {
+            throw new NotImplementedException();
+        }
+
         /*addMessageForUser: adding a message for a specific user*/
         public static void addMessageForUser(string userId, Message msg)
         {
@@ -190,8 +320,38 @@ namespace DB.Database
             user.userRole = "Admin";
             db.SaveChanges();
         }
+
+        /* deleteArea: setting the isDeletedorHidden property to true from db */
+        public static void deleteArea(string areaId)
+        {
+            var area = db.Areas.Find(areaId);
+            area.isDeletedOrHidden = true;
+            db.SaveChanges();
+        }
+
+        public static void deleteCategory(string catId)
+        {
+            var cat = db.Categories.Find(catId);
+            cat.isDeletedOrHidden = true;
+            db.SaveChanges();
+        }
+
+        public static void deleteSubcategory(string subId)
+        {
+            var sub = db.SubCategories.Find(subId);
+            sub.isDeletedOrHidden = true;
+            db.SaveChanges();
+        }
+
+        public static void deleteLocale(string locId)
+        {
+            var loc = db.Locales.Find(locId);
+            loc.isDeletedOrHidden = true;
+            db.SaveChanges();
+        }
+
         /* deletePost: setting the isDeletedorHidden property to true from db */
-        public static void deletePost(string postId)
+        public static void deletePost(int postId)
         {
             var post = db.Posts.Find(postId);
             post.isDeletedOrHidden = true;
@@ -274,6 +434,8 @@ namespace DB.Database
             db.User.Add(user);
             db.SaveChanges();
         }
+
+        
         /* getPost: gets the Post corresponding to the Post id */
         public static Post getPost(int id)
         {
@@ -282,6 +444,16 @@ namespace DB.Database
                         select post;
             Post p = posts.FirstOrDefault();
             return p;
+        }
+
+        /* getLocale: gets the Locale corresponding to the Locale id */
+        public static Locale getLocale(string id)
+        {
+            var locales = from locale in db.Locales
+                        where id == locale.localeID
+                        select locale;
+            Locale loc = locales.FirstOrDefault();
+            return loc;
         }
         /* getMessage: gets the Message corresponding to the Message Id */
         public static Message getMessage(int msgId)
@@ -300,6 +472,78 @@ namespace DB.Database
                         select user;
             User u = users.FirstOrDefault();
             return u;
+        }
+
+        public static bool CheckIfAreaExists(string area_id)
+        {
+            var area = db.Areas.Find(area_id);
+            if (area == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public static bool CheckIfCategoryExists(string category_id)
+        {
+            var cat = db.Categories.Find(category_id);
+            if (cat == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public static bool CheckIfUserExists(string userid)
+        {
+            var user = db.Users.Find(userid);
+            if (user == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public static IEnumerable<Post> getPostsForArea(string areaid)
+        {
+            var posts = from post in db.Posts
+                        where post.area == areaid
+                        select post;
+            return posts.ToList();
+        }
+
+        public static object getAllPostsWithResponsesForUser(string userid)
+        {
+            var AllPosts = getPosts(userid);
+            var Posts = new List<Post>();
+
+            foreach(var p in AllPosts)
+            {
+                if (p.messages.ToList().Count != 0)
+                {
+                    Posts.Add(p);
+                }
+            }
+
+            return Posts;
+        }
+
+        public static object getPostsUserRespondedTo(string userid)
+        {
+            var AllMessages = GetMessagesFromUser(userid);
+            var Posts = new List<Post>();
+
+            foreach(var m in AllMessages)
+            {
+                int postid = m.receiverID;
+                var post = getPost(postid);
+                Posts.Add(post);
+            }
+
+            return Posts;
         }
     }
 }

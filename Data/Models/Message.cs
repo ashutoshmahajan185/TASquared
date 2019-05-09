@@ -22,7 +22,8 @@ namespace Data.Models
         public String senderID { get; set; }
 
         [Required]
-        public String receiverID { get; set; }
+        //this is the postID
+        public int receiverID { get; set; }
 
         [Required]
         public String body { get; set; }
