@@ -101,9 +101,9 @@
     <Compile Include="Migrations\201905080211249_InitialCreate2.Designer.cs">
       <DependentUpon>201905080211249_InitialCreate2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201905091911454_initial-create.cs" />
-    <Compile Include="Migrations\201905091911454_initial-create.Designer.cs">
-      <DependentUpon>201905091911454_initial-create.cs</DependentUpon>
+    <Compile Include="Migrations\201905092016141_new-create.cs" />
+    <Compile Include="Migrations\201905092016141_new-create.Designer.cs">
+      <DependentUpon>201905092016141_new-create.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -142,8 +142,8 @@
     <EmbeddedResource Include="Migrations\201905080211249_InitialCreate2.resx">
       <DependentUpon>201905080211249_InitialCreate2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905091911454_initial-create.resx">
-      <DependentUpon>201905091911454_initial-create.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201905092016141_new-create.resx">
+      <DependentUpon>201905092016141_new-create.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

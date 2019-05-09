@@ -1,29 +1,28 @@
-﻿@model IEnumerable<Data.Models.User>
+﻿@model Data.Models.AdminViewModel
 
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/layout2.cshtml";
 }
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.userRole)
+            @Html.DisplayName("userrole")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.phoneNumber)
+            @Html.DisplayName("phoneNumber")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.email)
+            @Html.DisplayName("email")
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model.users) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.userRole)
@@ -41,5 +40,39 @@
         </td>
     </tr>
 }
+
+</table>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("title")
+        </th>
+        <th>
+            @Html.DisplayName("ID")
+        </th>
+        <th>
+            @Html.DisplayName("body")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.posts)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.body)
+            </td>
+          
+                          
+        </tr>
+    }
 
 </table>
