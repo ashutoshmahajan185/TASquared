@@ -120,6 +120,12 @@ namespace DB.Database
             return true;
         }
 
+        public static void modifyUserStatus(User user)
+        {
+            db.Entry(user).State = EntityState.Modified;
+            db.SaveChanges();
+        }
+
         /*GetAllCategories: gets all the categories */
         public static IEnumerable<Category> GetAllCategories()
         {
@@ -320,6 +326,15 @@ namespace DB.Database
             user.userRole = "Admin";
             db.SaveChanges();
         }
+        /* deleteUser: setting the isDeletedorHidden property to true from db */
+        public static void deleteUser(string userid)
+        {
+
+            /*
+            var user = db.User.Find(userid);
+            user.isDeletedOrHidden = true;
+            db.SaveChanges();*/
+        }
 
         /* deleteArea: setting the isDeletedorHidden property to true from db */
         public static void deleteArea(string areaId)
@@ -464,8 +479,32 @@ namespace DB.Database
             Message m = messages.FirstOrDefault();
             return m;
         }
+
+        /* getAllPosts: gets the Message corresponding to the Message Id */
+        public static IEnumerable<Post> getAllPosts()
+        {
+            var posts = from post in db.Posts
+                        select post;
+            
+            return posts;
+        }
+
+        public static IEnumerable<User> getAllUsers()
+        {
+            var users = from user in db.User
+                        select user;
+
+            return users;
+        }
+
+
+
+
+
+
+
         /* getUser: gets the User corresponding to the ID */
-        public static User getUser(int userId)
+        public static User getUser(string userId)
         {
             var users = from user in db.User
                         where userId.ToString() == user.userID

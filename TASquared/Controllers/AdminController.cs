@@ -13,18 +13,32 @@ namespace TASquared.Controllers
 {
     public class AdminController : Controller
     {
+
+        public AdminController()
+        {
+            var areas = DbLayer.GetAllAreas();
+            var locales = DbLayer.GetAllLocales();
+            var cat = DbLayer.GetAllCategories();
+            var subcat = DbLayer.GetAllSubCategories();
+
+            var layoutViewModel = new LayoutViewModel
+            {
+                areas = areas,
+                locales = locales,
+                categories = cat,
+                subcategories = subcat
+            };
+
+            ViewBag.layoutViewModel = layoutViewModel;
+        }
         //private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Admin
         public ActionResult Index()
         {
            
-            LayoutViewModel mymodel = new LayoutViewModel();
-            mymodel.areas = DbLayer.GetAllAreas();
-            mymodel.categories = DbLayer.GetAllCategories();
-            mymodel.subcategories = DbLayer.GetAllSubCategories();
-            mymodel.locales = DbLayer.GetAllLocales();
-            mymodel.posts = DbLayer.GetAllPosts();
+            AdminViewModel mymodel = new AdminViewModel();
+            mymodel.posts = DbLayer.getAllPosts();
             mymodel.users = DbLayer.getAllUsers();
             return View(mymodel);
             
@@ -33,7 +47,7 @@ namespace TASquared.Controllers
         // GET: Admin/Details/5
         //Allows admin to view User's information
             //user id in model should be string?
-        public ActionResult Details(int id)
+        public ActionResult Details(string id)
         {  
             /*
             if (id == null)
@@ -71,22 +85,21 @@ namespace TASquared.Controllers
             return View(user);
         }
         */
-        // GET: Admin/Edit/5
 
-        //Admin should be able to modify a area, a locale, a category or subcategory 
-        //overloaded Edit method?
-        public ActionResult Edit(string area_id)
+        // GET: Admin/Edit/5
+        //present the user modification information
+        public ActionResult Edit(string userid)
         {
-            if (area_id == null)
+            if (userid == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            if (!DbLayer.CheckIAreaExists(area_id))
+            if (!DbLayer.CheckIfUserExists(userid))
             {
                 return HttpNotFound();
             }
-            return View(DbLayer.getArea(area_id));
+            return View(DbLayer.getUser(userid));
         }
 
         // POST: Admin/Edit/5
@@ -98,26 +111,33 @@ namespace TASquared.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(user).State = EntityState.Modified;
-                db.SaveChanges();
+
+                DbLayer.modifyUserStatus(user);
+  
                 return RedirectToAction("Index");
             }
             return View(user);
         }
 
         // GET: Admin/Delete/5
+        //Deleting the user from database
         public ActionResult Delete(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.User.Find(id);
-            if (user == null)
+
+            if (DbLayer.CheckIfUserExists(id))
+            {
+                User user = DbLayer.getUser(id);
+                return View(user);
+            } else
             {
                 return HttpNotFound();
             }
-            return View(user);
+
+       
         }
 
         // POST: Admin/Delete/5
@@ -125,10 +145,20 @@ namespace TASquared.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            User user = db.User.Find(id);
-            db.User.Remove(user);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            if (DbLayer.CheckIfUserExists(id))
+            {
+                DbLayer.deleteUser(id);
+                return RedirectToAction("index");
+            }
+            else
+            {
+                return HttpNotFound();
+            }
         }
         /*
         protected override void Dispose(bool disposing)
