@@ -34,84 +34,93 @@
             </div>
         </div>
     </div>
+    
 
     <div class="container body-content">
-
         
 
-        <div class='container example-one'>
+                <div class='container example-one'>
 
-            <div class="dropdown">
-                <button class="dropbtn">Areas</button>
-                <div class="dropdown-content">
-                    @foreach (var item in model.areas)
-                    {
-                        @Html.ActionLink(item.name.ToString(), "IndexGivenPlaceOnly", "Posts", new { area_id = item.areaID, Place = "Area" }, null)
+                    <header class='example-one-header scroll'>
 
-
-                    }
-                </div>
-            </div>
-            <header class='example-one-header scroll'>
-
-
-                <nav class='vertical-align-middle'>
-                    <span class='nav-item'>
-                        @foreach (var item in model.locales)
-                        {
-                            <span class="nav-item">
-                                @Html.ActionLink(item.name.ToString(), "IndexGivenPlaceOnly", "Posts", new { area_id = item.localeID, Place = "Locale" }, null)
+                        <nav class='vertical-align-middle'>
+                            <span class='nav-item'>
+                                @foreach (var item in model.areas)
+                                {
+                                    <span class="nav-item">
+                                        @Html.ActionLink(item.name.ToString(), "IndexGivenPlaceOnly", "Posts", new { area_id = item.areaID, Place = "Area" }, null)
+                                    </span>
+                                }
                             </span>
-                        }
-                    </span>
 
-                </nav>
-            </header>
-        </div>
-        
-
-        <div class='container example-one'>
-            <div class="dropdown">
-                <button class="dropbtn">Categories</button>
-                <div class="dropdown-content">
-                    @foreach (var item in model.categories)
-                    {
-                        @Html.ActionLink(item.name.ToString(), "IndexGivenTypeOnly", "Categories", new { category_id = item.categoryID, Place = "Category" }, null)
-
-
-                    }
-
+                        </nav>
+                    </header>
                 </div>
-            </div>
 
-            <header class='example-one-header scroll'>
 
-                <nav class='vertical-align-middle'>
-                    <span class='nav-item'>
-                        @foreach (var item in model.subcategories)
-                        {
-                            <span class="nav-item">
-                                @Html.ActionLink(item.name.ToString(), "IndexGivenTypeOnly", "Posts", new { category_id = item.subCategoryID, Type = "SubCategory" }, null)
+                <div class='container example-one'>
+
+                    <header class='example-one-header scroll'>
+
+                        <nav class='vertical-align-middle'>
+                            <span class='nav-item'>
+                                @foreach (var item in model.categories)
+                                {
+                                    <span class="nav-item">
+                                        @Html.ActionLink(item.name.ToString(), "IndexGivenTypeOnly", "Posts", new { category_id = item.categoryID, Type = "Category" }, null)
+                                    </span>
+                                }
                             </span>
-                        }
-                    </span>
 
-                </nav>
-            </header>
-        </div>
+                        </nav>
+                    </header>
+                </div>
 
 
+                <p>@Html.DisplayName("Locales")</p>
+
+                @foreach (var item in model.locales)
+                {
+                    //@Html.DisplayFor(modelitem => item.name)
+
+
+                    @Html.ActionLink(item.name.ToString(), "IndexGivenPlaceOnly", "Posts", new { area_id = item.localeID, Place = "Locale" }, null)
+                }
+
+
+                <p>@Html.DisplayName("SubCategories")</p>
+
+                @foreach (var item in model.subcategories)
+                {
+                    //@Html.DisplayFor(modelitem => item.name)
+                    @Html.ActionLink(item.name.ToString(), "IndexGivenTypeOnly", "Posts", new { category_id = item.subCategoryID, Type = "SubCategory" }, null)
+                }
+
+                <div class="row">
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 filter">
+                        <p>
+                            Lorem ipsum dolor sit amet, equidem similique mea no, iusto cetero interpretaris mei ad. Cu sed modo putent, in pri inani appetere. Vis id quod aperiri necessitatibus. Unum pericula vim no, eu lobortis reformidans mea, ei pro ignota perfecto. An iusto
+                            placerat sit, id hinc integre elaboraret est. At nec libris definitiones, putent aperiri incorrupte qui ut.
+                        </p>
+                    </div>
+                    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 dynamic">
+                       
+                        @RenderBody()
+
+
+                    </div>
+                </div>
+            
+
+
+            <hr />
         
-
-
-        @RenderBody()
-
-
-        <hr />
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
 </body>
 </html>

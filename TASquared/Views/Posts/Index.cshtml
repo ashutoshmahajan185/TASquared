@@ -18,9 +18,6 @@
             @Html.DisplayNameFor(model => model.postTimestamp)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.postExpiration)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.ownerID)
         </th>
         <th>
@@ -29,24 +26,7 @@
         <th>
             @Html.DisplayNameFor(model => model.body)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.area)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.locale)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.category)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.subcategory)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.isDeletedOrHidden)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.canBeModified)
-        </th>
+
         <th></th>
     </tr>
 
@@ -59,9 +39,6 @@
             @Html.DisplayFor(modelItem => item.postTimestamp)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.postExpiration)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.ownerID)
         </td>
         <td>
@@ -70,24 +47,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.body)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.area)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.locale)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.category)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.subcategory)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.isDeletedOrHidden)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.canBeModified)
-        </td>
+
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
             @Html.ActionLink("Details", "Details", new { id=item.ID }) |
