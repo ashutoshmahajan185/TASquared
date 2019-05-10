@@ -28,6 +28,8 @@ header {
 
 .example-one-header,
 .example-two-header {
+
+    float: right;
     border-radius: 3px;
 }
 
@@ -62,16 +64,23 @@ header {
     
 }
 
-    .nav-item:not(:last-child) {
-        border-right: 1px solid rgba(114, 124, 135, 0.2);
-    }
+.nav-item:not(:last-child) {
+    border-right: 1px solid rgba(114, 124, 135, 0.2);
+}
 
 * {
     box-sizing: border-box;
 }
 
 .container {
-    text-align:center;
+    
+    margin-top: 30px;
+    text-align: center;
+
+}
+
+.dropdown {
+    float: left;
 }
 
 body {
@@ -109,4 +118,57 @@ nav {
 
 .scroll::-webkit-scrollbar {
     display: none;
+}
+
+
+/* Dropdown Button */
+.dropbtn {
+    background-color: black;
+    width: 50%;
+    border-radius: 4px;
+    color: white;
+    
+    font-size: 16px;
+    border: none;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    
+    
+    margin-top: 30px;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+    background-color: black;
 }

@@ -37,35 +37,30 @@
 
     <div class="container body-content">
 
+        
+
         <div class='container example-one'>
-            
+
+            <div class="dropdown">
+                <button class="dropbtn">Areas</button>
+                <div class="dropdown-content">
+                    @foreach (var item in model.areas)
+                    {
+                        @Html.ActionLink(item.name.ToString(), "IndexGivenPlaceOnly", "Posts", new { area_id = item.areaID, Place = "Area" }, null)
+
+
+                    }
+                </div>
+            </div>
             <header class='example-one-header scroll'>
+
 
                 <nav class='vertical-align-middle'>
                     <span class='nav-item'>
-                        @foreach (var item in model.areas)
+                        @foreach (var item in model.locales)
                         {
                             <span class="nav-item">
-                                @Html.ActionLink(item.name.ToString(), "IndexGivenPlaceOnly", "Posts", new { area_id = item.areaID, Place = "Area" }, null)
-                            </span>
-                        }
-                    </span>
-
-                </nav>
-            </header>
-        </div>
-
-
-        <div class='container example-one'>
-            
-            <header class='example-one-header scroll'>
-
-                <nav class='vertical-align-middle'>
-                    <span class='nav-item'>
-                        @foreach (var item in model.categories)
-                        {
-                            <span class="nav-item">
-                                @Html.ActionLink(item.name.ToString(), "IndexGivenTypeOnly", "Posts", new { category_id = item.categoryID, Type = "Category" }, null)
+                                @Html.ActionLink(item.name.ToString(), "IndexGivenPlaceOnly", "Posts", new { area_id = item.localeID, Place = "Locale" }, null)
                             </span>
                         }
                     </span>
@@ -74,25 +69,39 @@
             </header>
         </div>
         
-       
-        <p>@Html.DisplayName("Locales")</p>
 
-        @foreach (var item in model.locales)
-        {
-            //@Html.DisplayFor(modelitem => item.name)
+        <div class='container example-one'>
+            <div class="dropdown">
+                <button class="dropbtn">Categories</button>
+                <div class="dropdown-content">
+                    @foreach (var item in model.categories)
+                    {
+                        @Html.ActionLink(item.name.ToString(), "IndexGivenTypeOnly", "Categories", new { category_id = item.categoryID, Place = "Category" }, null)
 
 
-            @Html.ActionLink(item.name.ToString(), "IndexGivenPlaceOnly", "Posts", new { area_id = item.localeID, Place = "Locale" }, null)
-        }
+                    }
 
-       
-        <p>@Html.DisplayName("SubCategories")</p>
+                </div>
+            </div>
 
-        @foreach (var item in model.subcategories)
-        {
-            //@Html.DisplayFor(modelitem => item.name)
-            @Html.ActionLink(item.name.ToString(), "IndexGivenTypeOnly", "Posts", new { category_id = item.subCategoryID, Type = "SubCategory" }, null)
-        }
+            <header class='example-one-header scroll'>
+
+                <nav class='vertical-align-middle'>
+                    <span class='nav-item'>
+                        @foreach (var item in model.subcategories)
+                        {
+                            <span class="nav-item">
+                                @Html.ActionLink(item.name.ToString(), "IndexGivenTypeOnly", "Posts", new { category_id = item.subCategoryID, Type = "SubCategory" }, null)
+                            </span>
+                        }
+                    </span>
+
+                </nav>
+            </header>
+        </div>
+
+
+        
 
 
         @RenderBody()
