@@ -154,8 +154,9 @@ namespace TASquared.Controllers
 
         //viewing a post
         // GET: Posts/Details/5
-        public ActionResult Details(string area_id, string category_id, int? id)
+        public ActionResult Details(int? id)
         {
+            /**
             //handle errors and edgecases
             if (area_id == null || category_id == null)
             {
@@ -165,7 +166,8 @@ namespace TASquared.Controllers
             {
                 return HttpNotFound();
             }
-            else if (id == null)
+    **/
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
