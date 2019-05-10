@@ -545,5 +545,15 @@ namespace DB.Database
 
             return Posts;
         }
+
+        public static IEnumerable<Post> GetAllPosts()
+        {
+            throw new NotImplementedException();
+        }
+
+        public static IEnumerable<User> GetAllUsers()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

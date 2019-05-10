@@ -13,7 +13,7 @@ namespace TASquared.Controllers
 {
     public class AdminController : Controller
     {
-        //private ApplicationDbContext db = new ApplicationDbContext();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Admin
         public ActionResult Index()
@@ -25,7 +25,7 @@ namespace TASquared.Controllers
             mymodel.subcategories = DbLayer.GetAllSubCategories();
             mymodel.locales = DbLayer.GetAllLocales();
             mymodel.posts = DbLayer.GetAllPosts();
-            mymodel.users = DbLayer.getAllUsers();
+            mymodel.users = DbLayer.GetAllUsers();
             return View(mymodel);
             
         }
@@ -82,7 +82,7 @@ namespace TASquared.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            if (!DbLayer.CheckIAreaExists(area_id))
+            if (!DbLayer.CheckIfAreaExists(area_id))
             {
                 return HttpNotFound();
             }
