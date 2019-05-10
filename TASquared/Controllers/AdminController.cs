@@ -13,32 +13,18 @@ namespace TASquared.Controllers
 {
     public class AdminController : Controller
     {
-
-        public AdminController()
-        {
-            var areas = DbLayer.GetAllAreas();
-            var locales = DbLayer.GetAllLocales();
-            var cat = DbLayer.GetAllCategories();
-            var subcat = DbLayer.GetAllSubCategories();
-
-            var layoutViewModel = new LayoutViewModel
-            {
-                areas = areas,
-                locales = locales,
-                categories = cat,
-                subcategories = subcat
-            };
-
-            ViewBag.layoutViewModel = layoutViewModel;
-        }
         //private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Admin
         public ActionResult Index()
         {
            
-            AdminViewModel mymodel = new AdminViewModel();
-            mymodel.posts = DbLayer.getAllPosts();
+            LayoutViewModel mymodel = new LayoutViewModel();
+            mymodel.areas = DbLayer.GetAllAreas();
+            mymodel.categories = DbLayer.GetAllCategories();
+            mymodel.subcategories = DbLayer.GetAllSubCategories();
+            mymodel.locales = DbLayer.GetAllLocales();
+            mymodel.posts = DbLayer.GetAllPosts();
             mymodel.users = DbLayer.getAllUsers();
             return View(mymodel);
             
@@ -95,7 +81,7 @@ namespace TASquared.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            if (!DbLayer.CheckIfUserExists(userid))
+            if (!DbLayer.CheckIAreaExists(area_id))
             {
                 return HttpNotFound();
             }
