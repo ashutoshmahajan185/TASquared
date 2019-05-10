@@ -13,13 +13,6 @@ namespace TASquared
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            //.com/Area/id1/Category/id2/List/userid
-            routes.MapRoute(
-                name: "Posts",
-                url: "{Place}/{area_id}/{Type}/{category_id}/{action}/{id}",
-                defaults: new { controller = "Posts", action = "Index", id = UrlParameter.Optional }
-            );
-
             //.com / inbox /{ action}/ userid
             routes.MapRoute(
                 name: "Inbox",
@@ -30,21 +23,29 @@ namespace TASquared
             //.com/{controller}/{action}/userid
             routes.MapRoute(
                 name: "Admin_ALSSC",
-                url: "{controller}/{action}/{userid}/{id}",
-                defaults: new { controller = "Area", action = "Index", id = UrlParameter.Optional }
+                url: "Admin/{controller}/{action}/{userid}/{id}",
+                defaults: new { controller = "Admin", action = "Index", id = UrlParameter.Optional }
             );
 
             //.com/admin/{action}/userid/{id} [admin controller]
             routes.MapRoute(
                name: "Admin",
                url: "Admin/{action}/{userid}/{id}",
-               defaults: new { controller = "Admin", action = "ListUsers", id = UrlParameter.Optional }
+               defaults: new { controller = "Admin", action = "Index", id = UrlParameter.Optional }
            );
 
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+
+            );
+
+            //.com/Area/id1/Category/id2/List/userid
+            routes.MapRoute(
+                name: "Posts",
+                url: "{Place}/{area_id}/{Type}/{category_id}/{action}/{id}",
+                defaults: new { controller = "Posts", action = "Index", id = UrlParameter.Optional }
             );
         }
     }
