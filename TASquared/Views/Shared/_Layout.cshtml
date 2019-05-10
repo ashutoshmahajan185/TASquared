@@ -40,14 +40,25 @@
 
         <div class='container example-one'>
             
+            <div class="dropdown">
+                <button class="dropbtn">Areas</button>
+                <div class="dropdown-content">
+                    @foreach (var item in model.areas)
+                    {
+                        @Html.ActionLink(item.name.ToString(), "IndexGivenPlaceOnly", "Posts", new { area_id = item.areaID, Place = "Area" }, null)
+
+
+                    }
+                </div>
+           </div>
             <header class='example-one-header scroll'>
 
                 <nav class='vertical-align-middle'>
                     <span class='nav-item'>
-                        @foreach (var item in model.areas)
+                        @foreach (var item in model.locales)
                         {
                             <span class="nav-item">
-                                @Html.ActionLink(item.name.ToString(), "IndexGivenPlaceOnly", "Posts", new { area_id = item.areaID, Place = "Area" }, null)
+                                @Html.ActionLink(item.name.ToString(), "IndexGivenPlaceOnly", "Posts", new { area_id = item.localeID, Place = "Locale" }, null)
                             </span>
                         }
                     </span>
@@ -59,14 +70,26 @@
 
         <div class='container example-one'>
             
+            <div class="dropdown">
+                <button class="dropbtn">Categories</button>
+                <div class="dropdown-content">
+                    @foreach (var item in model.categories)
+                    {
+                        @Html.ActionLink(item.name.ToString(), "IndexGivenTypeOnly", "Posts", new { category_id = item.categoryID, Type = "Category" }, null)
+
+
+                    }
+
+                </div>
+            </div>
             <header class='example-one-header scroll'>
 
                 <nav class='vertical-align-middle'>
                     <span class='nav-item'>
-                        @foreach (var item in model.categories)
+                        @foreach (var item in model.subcategories)
                         {
                             <span class="nav-item">
-                                @Html.ActionLink(item.name.ToString(), "IndexGivenTypeOnly", "Posts", new { category_id = item.categoryID, Type = "Category" }, null)
+                                @Html.ActionLink(item.name.ToString(), "IndexGivenTypeOnly", "Posts", new { category_id = item.subCategoryID, Type = "SubCategory" }, null)
                             </span>
                         }
                     </span>
@@ -76,27 +99,21 @@
         </div>
         
        
-        <p>@Html.DisplayName("Locales")</p>
-
-        @foreach (var item in model.locales)
-        {
-            //@Html.DisplayFor(modelitem => item.name)
-
-
-            @Html.ActionLink(item.name.ToString(), "IndexGivenPlaceOnly", "Posts", new { area_id = item.localeID, Place = "Locale" }, null)
-        }
-
-       
-        <p>@Html.DisplayName("SubCategories")</p>
-
-        @foreach (var item in model.subcategories)
-        {
-            //@Html.DisplayFor(modelitem => item.name)
-            @Html.ActionLink(item.name.ToString(), "IndexGivenTypeOnly", "Posts", new { category_id = item.subCategoryID, Type = "SubCategory" }, null)
-        }
+    
+        <div class="row">
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 filter">
+                        <p>
+                            Lorem ipsum dolor sit amet, equidem similique mea no, iusto cetero interpretaris mei ad. Cu sed modo putent, in pri inani appetere. Vis id quod aperiri necessitatibus. Unum pericula vim no, eu lobortis reformidans mea, ei pro ignota perfecto. An iusto
+                            placerat sit, id hinc integre elaboraret est. At nec libris definitiones, putent aperiri incorrupte qui ut.
+                        </p>
+                    </div>
+                    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 dynamic">
+                       
+                        @RenderBody()
 
 
-        @RenderBody()
+                    </div>
+                </div>
 
 
                     </div>
